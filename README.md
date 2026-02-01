@@ -16,6 +16,8 @@ This project is a Python-based cold email automation tool that sends personalize
 ---
 
 ## Project structure
+
+```text
 cold_email_bot/
 ├── send_emails.py
 ├── templates/
@@ -28,7 +30,7 @@ cold_email_bot/
 └── README.md
 
 
-
+```
 ---
 
 ## Important note about data privacy
@@ -75,3 +77,12 @@ python3 send_emails.py
 - This project is for learning and demonstration purposes
 - Users should follow email provider policies and local regulations
 - Do not use this project for spam or unethical email campaigns
+
+
+## Demo
+
+### Script execution
+![Terminal Demo](screenshots/demo_terminal.png)
+
+### Email received
+![Email Demo](screenshots/demo_email.png)
