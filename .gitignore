@@ -1,0 +1,5 @@
+# Ignore sensitive CSV files
+data/*.csv
+
+# Ignore environment secrets
+.env

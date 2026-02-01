@@ -1,0 +1,86 @@
+import smtplib
+import pandas as pd
+import time
+from email.message import EmailMessage
+from pathlib import Path
+
+
+EMAIL_ADDRESS = "karthikreddypeddala@gmail.com"
+EMAIL_PASSWORD = "oxqbowxkxtruhbug"
+
+CSV_PATH = "data/hr_contacts_all_from_pdf.csv"
+RESUME_PATH = "resume/karthikCV.pdf"
+EMAIL_TEMPLATE_PATH = "templates/email.txt"
+
+MAX_EMAILS_PER_RUN = 100
+DELAY_SECONDS = 120  # 2 minutes
+
+
+
+df = pd.read_csv(CSV_PATH)
+
+
+df.columns = df.columns.str.strip().str.lower()
+
+
+required_columns = {"name", "email", "title", "company"}
+missing = required_columns - set(df.columns)
+
+if missing:
+    raise Exception(f"❌ Missing required columns in CSV: {missing}")
+
+
+template = Path(EMAIL_TEMPLATE_PATH).read_text()
+
+sent_count = 0
+
+with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+    server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+
+    for _, row in df.iterrows():
+
+        if sent_count >= MAX_EMAILS_PER_RUN:
+            break
+
+        email = str(row["email"]).strip()
+        name = str(row["name"]).strip()
+        title = str(row["title"]).strip()
+        company = str(row["company"]).strip()
+
+        
+        if "@" not in email:
+            print(f"⚠️ Skipping invalid email: {email}")
+            continue
+
+        body = (
+            template
+            .replace("{{Name}}", name)
+            .replace("{{Title}}", title)
+            .replace("{{Company}}", company)
+        )
+
+        msg = EmailMessage()
+        msg["From"] = EMAIL_ADDRESS
+        msg["To"] = email
+        msg["Subject"] = f"Application for Software Engineer / Full Stack Role at {company}"
+        msg.set_content(body)
+
+        with open(RESUME_PATH, "rb") as f:
+            msg.add_attachment(
+                f.read(),
+                maintype="application",
+                subtype="pdf",
+                filename="Karthik_Reddy_Resume.pdf"
+            )
+
+        server.send_message(msg)
+        sent_count += 1
+        print(f"✅ Sent {sent_count}/{MAX_EMAILS_PER_RUN} → {email}")
+
+        time.sleep(DELAY_SECONDS)
+
+
+remaining_df = df.iloc[sent_count:]
+remaining_df.to_csv(CSV_PATH, index=False)
+
+print(f"\n🎯 Done. Sent {sent_count} emails. Remaining: {len(remaining_df)}")
