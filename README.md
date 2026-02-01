@@ -82,7 +82,7 @@ python3 send_emails.py
 ## Demo
 
 ### Script execution
-![Terminal Demo](screenshots/demo_terminal.png)
+![Terminal Demo](screenshots/demo_terminal.png.png)
 
 ### Email received
-![Email Demo](screenshots/demo_email.png)
+![Email Demo](screenshots/demo_email.png.png)
