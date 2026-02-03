@@ -5,3 +5,5 @@ data/*.csv
 
 # Ignore environment secrets
 .env
+
+.DS_Store
