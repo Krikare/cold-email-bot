@@ -4,15 +4,11 @@ Hi {{Name}},
 
 I hope you’re doing well.
 
-My name is Karthik Reddy, a Computer Science Engineering student with hands-on
-experience in full-stack development and backend systems.
+My name is Karthik Reddy, a Computer Science Engineering student with hands-on experience in full-stack development and backend systems.
 
-I recently completed a Software Engineer Internship where I worked with
-Node.js, PostgreSQL, Redis, AWS, and CI/CD pipelines, and I’m actively seeking
-Software Engineer / Full Stack opportunities at {{Company}}.
+I recently completed a Software Engineer Internship where I worked with Node.js, PostgreSQL, Redis, AWS, and CI/CD pipelines, and I’m actively seeking Software Engineer / Full Stack opportunities at {{Company}}.
 
-I’ve attached my resume for a quick review and would be glad to discuss
-any relevant openings if my profile fits your requirements.
+I’ve attached my resume for a quick review and would be glad to discuss any relevant openings if my profile fits your requirements.
 
 Thank you for your time.
 
