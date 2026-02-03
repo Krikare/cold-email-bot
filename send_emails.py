@@ -38,7 +38,11 @@ signal.signal(signal.SIGINT, toggle_pause)    # Ctrl+C → pause/resume
 signal.signal(signal.SIGQUIT, stop_program)  # Ctrl+\ → stop completely
 
 
-df = pd.read_csv(CSV_PATH)
+df = pd.read_csv(
+    CSV_PATH,
+    engine="python",
+    on_bad_lines="skip"
+)
 df.columns = df.columns.str.strip().str.lower()
 
 required_columns = {"name", "email", "title", "company"}
